@@ -155,7 +155,7 @@ public class toDoList {
 	}
 	if(message.getText().contains("/remove")) {
         int remove = state.indexOf(chatId+"remove");
-        String param = message.getText().replace("/remove", "").replaceAll("\\s+", " ");
+        String param = message.getText().replace("/remove", "").replaceAll("\\s+", " ");			
 		if(remove>-1) {
 			if(param!=null) {	
 				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -343,10 +343,9 @@ public class toDoList {
 	if(message.getText().contains("/date")) {
 	   int changing = state.indexOf(chatId+"changing");
 	        String temp = message.getText().replace("/date", "").replaceAll("\\s+", " ");
-			temp = temp.trim().replaceAll(" +", " ");
 			if(changing>-1) {
 				if(temp!="") {
-					SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     try {
 						format.parse(temp);
 						
