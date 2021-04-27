@@ -1,0 +1,55 @@
+if(message.getText().equals("/todo_remove")) {
+		int remove = state.indexOf(chatId+"remove");
+		int todo = state.indexOf(chatId+"todo");
+		int add = state.indexOf(chatId+"add");
+		int reminder = state.indexOf(chatId+"reminder");
+		String meessage = "remove mode initialized";
+		System.out.println(remove+"remoa");
+		if(remove>-1) {
+			meessage = "remove mode reinitialized";
+			return meessage;
+		}
+		if(todo>-1) {
+			state.remove(todo);
+			meessage = "quitting todo mode initializing remove mode";
+   		}if(add>-1) {
+   			state.remove(add);
+			meessage = "quitting todo mode initializing remove mode";
+		}
+		if(reminder>-1) {
+   			state.remove(reminder);
+			meessage = "quitting todo mode initializing remove mode";
+		}
+		state.add(chatId+"remove");
+		return meessage;
+	}
+	if(message.getText().contains("/delete")) {
+        int remove = state.indexOf(chatId+"remove");
+        String param = message.getText().replace("/delete", "");
+		if(remove>-1) {
+			if(param!=null) {	
+				state.add(chatId+"remove");
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+				try {
+					format.parse(param);
+					try {
+						csvData csv = new csvData();
+					    if(!csv.deleteData("test.txt", param).equals("error")) {
+					    	state.remove(remove);
+							System.out.println(state.indexOf(chatId+"remove"));
+						    return "data removed";	
+					    }
+					    return "no data found";
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					return "incorrect format";
+				}
+			}	
+			
+		}
+		return "invalid command try again";
+	} 

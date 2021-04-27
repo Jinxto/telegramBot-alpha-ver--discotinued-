@@ -171,6 +171,7 @@ public class toDoList {
 					    return "";
 					} catch (IOException e) {
 						e.printStackTrace();
+						return "No data found or it maybe auto removed when reminder system activates";
 					}
 				} catch (ParseException e) {
 					return "Incorrect date format example: {DD/MM/YYYY HH:MM} try again!";
