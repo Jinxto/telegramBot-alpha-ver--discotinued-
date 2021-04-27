@@ -63,10 +63,10 @@ public class toDoList {
 	if(message.getText().contains("/add")) {
 		int add = state.indexOf(chatId+"add");
 		String temp = message.getText().replace("/add","");
+		temp= StringUtils.normalizeSpace( temp );				
 		System.out.println("yes");
 		if(add>-1) {
 			if(!temp.isEmpty()) {
-				temp = temp.trim().replaceAll(" +", " ");
 				data.add(chatId+"/id");
 				data.add(chatId+"/data"+temp);
 				data.add(chatId+"/date");
@@ -82,7 +82,7 @@ public class toDoList {
 	}
 	if(message.getText().contains("/reminder")) {
 		int reminder = state.indexOf(chatId+"reminder");
-		String temp = message.getText().replace("/reminder", "");
+		String temp = message.getText().replace("/reminder", "").replaceAll("\\s+", " ");
 		if(reminder>-1) {
 		   if(!temp.isEmpty()) {
 			  try{
@@ -155,7 +155,7 @@ public class toDoList {
 	}
 	if(message.getText().contains("/remove")) {
         int remove = state.indexOf(chatId+"remove");
-        String param = message.getText().replace("/remove", "");
+        String param = message.getText().replace("/remove", "").replaceAll("\\s+", " ");
 		if(remove>-1) {
 			if(param!=null) {	
 				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -289,7 +289,7 @@ public class toDoList {
 	}if(message.getText().contains("/select")) {
 		int edit = state.indexOf(chatId+"edit");
 		if(edit>-1) {
-			String temp = message.getText().replace("/select", "");
+			String temp = message.getText().replace("/select", "").replaceAll("\\s+", " ");
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			try {
 				format.parse(temp);
@@ -341,7 +341,8 @@ public class toDoList {
 	}
 	if(message.getText().contains("/date")) {
 	   int changing = state.indexOf(chatId+"changing");
-	        String temp = message.getText().replace("/date", "");
+	        String temp = message.getText().replace("/date", "").replaceAll("\\s+", " ");
+			temp = temp.trim().replaceAll(" +", " ");
 			if(changing>-1) {
 				if(temp!="") {
 					SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
