@@ -32,10 +32,10 @@ public class timeComparing extends telegramBot {
     			String temp2 = data[((2*i)+2)+i].replace(temp+"/date", "");
     			System.out.println(date2+" "+"comparing"+temp2);
     			if(temp2.equals(date2)) {
-				  String temp3 = data[((2*i)+1)+i].replace(temp+"/data", "");
+				  String temp3 = data[((2*i)+1)+i].replace(temp+"/data", "").replace("\\n", "\n");
 				  System.out.println(temp+"/date"+temp2);
 				  message.setChatId(temp);
-				  message.setText("Hi you have scheduled reminder Data: "+ temp3+" Date:"+temp2);
+				  message.setText("Hi you have scheduled reminder:\nData: "+ temp3+"\nDate:"+temp2);
 				  System.out.println("date compare success");
 				  
 				  try {

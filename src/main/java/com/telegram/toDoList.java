@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class toDoList {
@@ -62,18 +63,21 @@ public class toDoList {
 	 }
 	if(message.getText().contains("/add")) {
 		int add = state.indexOf(chatId+"add");
-		String temp = message.getText().replace("/add","");
-		temp= StringUtils.normalizeSpace( temp );				
-		System.out.println("yes");
+		String temp = message.getText().replace("/add","").replace("|", "");
+		//temp= StringUtils.normalizeSpace( temp );
+        temp = StringEscapeUtils.escapeJava(temp);
+		System.out.println(temp);
 		if(add>-1) {
 			if(!temp.isEmpty()) {
 				data.add(chatId+"/id");
 				data.add(chatId+"/data"+temp);
+				System.out.println(temp+"test");
 				data.add(chatId+"/date");
 				state.add(chatId+"reminder");
 				state.remove(chatId+"add");
-				System.out.println("added");
-				return "Data is temporary stored! Please continue by inserting command /reminder date [Example: /reminder 24/02/2020 18:56] for Data: " + temp;
+				temp = temp.replace("\\n", "\n");
+				System.out.println(temp);
+				return "Data is temporary stored! Please continue by inserting command: \n/reminder date [Example: /reminder 24/02/2020 18:56] \nFor Data: " + temp;
 			}
 			return "Empty parameter";
 		}
@@ -317,7 +321,8 @@ public class toDoList {
 	}
 	if(message.getText().contains("/data")) {
         int changing = state.indexOf(chatId+"changing");
-        String temp = message.getText().replace("/data", "");
+        String temp = message.getText().replace("/data", "").replace("|", "");
+        temp = StringEscapeUtils.escapeJava(temp);
 		if(changing>-1) {
 		   if(temp!="") {
 			  temp= StringUtils.normalizeSpace( temp );				

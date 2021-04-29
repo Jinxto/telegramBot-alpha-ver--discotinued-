@@ -30,8 +30,8 @@ public class telegramBot extends TelegramLongPollingBot {
 		           sent = true;
 		           for(int i = 0; i<todolist.listtemp.length;i++) {
 		        	   String temp = todolist.listtemp[i].replace(message.getChatId().toString()+"/id"+"|"+message.getChatId().toString()+"/data", "");
-		        	   temp = temp.replace("|"+message.getChatId().toString()+"/date", " Date:");
-		        	   temp = "Data: "+temp;
+		        	   temp = temp.replace("|"+message.getChatId().toString()+"/date", "\nDate:");
+		        	   temp = "\nData: "+temp.replace("\\n", "\n");
 		        	   message.setText(temp);
 		        	   try {
 				            execute(message);
