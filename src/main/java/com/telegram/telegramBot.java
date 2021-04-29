@@ -1,4 +1,5 @@
 package com.telegram;
+
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -11,15 +12,16 @@ public class telegramBot extends TelegramLongPollingBot {
 	@Override
 	public void onUpdateReceived(Update update) {
 		 if (update.hasMessage() && update.getMessage().hasText()) {
+			 System.out.println(update.getMessage().getText());
 			   sent = false;
 			   String x = todolist.todo(update.getMessage());
 		       message.setChatId(update.getMessage().getChatId().toString());
 			   if(x!=null) {
 				   message.setText(x);
 			   }
-			   
+		   
 			   if(update.getMessage().getText().contains("/corona")) {
-				 
+				   
 			    	corona china = new corona();
 			    	china.coronaChecker(update.getMessage());
 			    }
@@ -46,6 +48,13 @@ public class telegramBot extends TelegramLongPollingBot {
 			        }
 		        }
 		     }
+		   if (update.hasMessage() && update.getMessage().hasPhoto()) {
+			   if(update.getMessage().getCaption()!=null && update.getMessage().getCaption().equals("/whatanime")){
+				  anime anim = new anime();
+                  anim.connectAnime(anim.executed(update.getMessage()),update.getMessage()); 			
+			}
+		   }
+			
 		        
 		    }
 	
@@ -53,13 +62,13 @@ public class telegramBot extends TelegramLongPollingBot {
 	@Override
 	public String getBotUsername() {
 		// TODO Auto-generated method stub
-		return "bot_name_here";
+		return "jinxto_bot";
 	}
 
 	@Override
 	public String getBotToken() {
 		// TODO Auto-generated method stub
-		return "token_here";
+		return "1798704202:AAGVgDnvvC_h1QYpCpSN9HhAlhIWtt9YSss";
 	}
 
 

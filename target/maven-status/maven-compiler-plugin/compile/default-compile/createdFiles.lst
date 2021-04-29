@@ -2,6 +2,7 @@ com/telegram/coronaModel.class
 com/telegram/csvData.class
 com/telegram/timeComparing.class
 com/telegram/telegramBot.class
+com/telegram/anime.class
 com/telegram/toDoList.class
 com/telegram/App.class
 com/telegram/corona.class

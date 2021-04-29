@@ -71,11 +71,22 @@ public class corona extends telegramBot{
 	 public void coronaChecker(Message message) {
 		String temp = message.getText().replace("/corona ", "").toLowerCase();
 		this.message.setChatId(message.getChatId().toString());
+		if(temp.equals("help")) {
+		this.message.setText("Type /corona then select the countries! If countries has 2 names I.E usa uk uae just type united-states, united-kingdom, united-arab-emirates")	; 
+		try {
+			execute(this.message);
+			return;
+		} catch (TelegramApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//\n for next line
+		}
 		if(temp!=" " || temp!="") {
 		coronaModel coron = coronad(temp);
 		if(coron!=null) {
 			System.out.println("sent");
-			this.message.setText("Country: "+coron.getCountry()+" New cases: "+coron.getNewConfirmed()+" Total cases: "+coron.getTotalConfirmed()+" New deaths: "+ coron.getNewDeaths()+" Total deaths: "+ coron.getTotalDeaths()+" New recovered: "+ coron.getNewRecovered()+" Total recovered: "+ coron.getTotalrecovered()+" Date: "+ coron.getDate());
+			this.message.setText("Country: "+coron.getCountry()+" \nNew cases: "+coron.getNewConfirmed()+" \nTotal cases: "+coron.getTotalConfirmed()+" \nNew deaths: "+ coron.getNewDeaths()+" \nTotal deaths: "+ coron.getTotalDeaths()+" \nNew recovered: "+ coron.getNewRecovered()+" \nTotal recovered: "+ coron.getTotalrecovered()+" \nDate: "+ coron.getDate());
 			try {
 	            execute(this.message); 
 	        } catch (TelegramApiException e) {
