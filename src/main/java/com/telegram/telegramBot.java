@@ -62,13 +62,13 @@ public class telegramBot extends TelegramLongPollingBot {
 	@Override
 	public String getBotUsername() {
 		// TODO Auto-generated method stub
-		return "jinxto_bot";
+		return "bot_name";
 	}
 
 	@Override
 	public String getBotToken() {
 		// TODO Auto-generated method stub
-		return "1798704202:AAGVgDnvvC_h1QYpCpSN9HhAlhIWtt9YSss";
+		return "bot_token";
 	}
 
 
