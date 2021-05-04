@@ -25,6 +25,11 @@ public class telegramBot extends TelegramLongPollingBot {
 			    	corona china = new corona();
 			    	china.coronaChecker(update.getMessage());
 			    }
+			   if(update.getMessage().getText().equals("/memegenerator")) {
+				   System.out.println("memetialized");
+				   memegenerator meme = new memegenerator();
+				   meme.generateMeme(update.getMessage());
+			   }
 		        
 		        if(todolist.todo(update.getMessage()).equals(update.getMessage().getChatId().toString()+"listall")) {
 		           sent = true;
