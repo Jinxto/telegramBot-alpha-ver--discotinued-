@@ -8,16 +8,23 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class telegramBot extends TelegramLongPollingBot {
 	toDoList todolist = new toDoList();
     SendMessage message = new SendMessage();
-	boolean sent;
+  
 	@Override
 	public void onUpdateReceived(Update update) {
 		 if (update.hasMessage() && update.getMessage().hasText()) {
 			 System.out.println(update.getMessage().getText());
-			   sent = false;
 			   String x = todolist.todo(update.getMessage());
+			   System.out.println(x);
 		       message.setChatId(update.getMessage().getChatId().toString());
 			   if(x!=null) {
 				   message.setText(x);
+				   System.out.println("yes231");
+				   try {
+					execute(message);
+				} catch (TelegramApiException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			   }
 		   
 			   if(update.getMessage().getText().contains("/corona")) {
@@ -27,12 +34,11 @@ public class telegramBot extends TelegramLongPollingBot {
 			    }
 			   if(update.getMessage().getText().equals("/memegenerator")) {
 				   System.out.println("memetialized");
-				   memegenerator meme = new memegenerator();
+				   anime meme = new anime();
 				   meme.generateMeme(update.getMessage());
 			   }
-		        
-		        if(todolist.todo(update.getMessage()).equals(update.getMessage().getChatId().toString()+"listall")) {
-		           sent = true;
+		        String listing =todolist.listall(update.getMessage());
+		        if(listing.equals(update.getMessage().getChatId().toString()+"listall")) {
 		           for(int i = 0; i<todolist.listtemp.length;i++) {
 		        	   String temp = todolist.listtemp[i].replace(message.getChatId().toString()+"/id"+"|"+message.getChatId().toString()+"/data", "");
 		        	   temp = temp.replace("|"+message.getChatId().toString()+"/date", "\nDate:");
@@ -45,13 +51,16 @@ public class telegramBot extends TelegramLongPollingBot {
 				        }
 		           }
 		        }
-		        if(sent==false) {
+		        if(listing.equals("null")) {
+		        	message.setText("/todo listall is not a session based command you have to type /todo quit to quit your current session before continuing /todo listall");
 		        	try {
-			            execute(message); 
-			        } catch (TelegramApiException e) {
-			            e.printStackTrace();
-			        }
+						execute(message);
+					} catch (TelegramApiException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		        }
+		       
 		     }
 		   if (update.hasMessage() && update.getMessage().hasPhoto()) {
 			   if(update.getMessage().getCaption()!=null && update.getMessage().getCaption().equals("/whatanime")){
@@ -67,13 +76,13 @@ public class telegramBot extends TelegramLongPollingBot {
 	@Override
 	public String getBotUsername() {
 		// TODO Auto-generated method stub
-		return "bot_name";
+		return "jinxto_bot";
 	}
 
 	@Override
 	public String getBotToken() {
 		// TODO Auto-generated method stub
-		return "bot_token";
+		return "1798704202:AAGVgDnvvC_h1QYpCpSN9HhAlhIWtt9YSss";
 	}
 
 
