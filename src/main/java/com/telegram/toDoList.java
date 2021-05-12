@@ -1,7 +1,11 @@
 package com.telegram;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,8 +15,11 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class toDoList{
@@ -378,10 +385,11 @@ public toDoList() {
 			return "Invalid command";
 		}
 	if(message.getText().equals("/imlonely")) {
-		String message1 = "deepLearning mode activated";
+		String message1 = "deepLearning mode activated, while talking with the bot please wait for a few seconds, this is because the bot runs on javascript and the api itself is very slow";
 		for(int k = 0; k<state.size();k++) {
 			if(state.get(k).getChatId().equals(chatId)) {
-				message1 = "Leaving "+state.get(k).getCategory()+" initialzing deeplearning mode";
+				message1 = "Leaving "+state.get(k).getCategory()+" initialzing deeplearning mode, while talking to the bot, please wait for it to"
+						+ "load because the bot is run on javascript and that specific api is quite slow so sorry for the inconvenience";
 				state.remove(k);
 			}
 		}
@@ -416,28 +424,24 @@ public toDoList() {
 		
 	}
 	if(message.hasText()) {
-		System.out.println("hastexttf");
 		for(int k = 0; k<state.size();k++) {
-			System.out.println("kay");
 			if(state.get(k).getCategory().equals("deeplearning")&& state.get(k).getChatId().equals(chatId)) {
-				System.out.println("woops");
-			    ScriptEngine ee = new ScriptEngineManager().getEngineByName("js");  					
-		        try {
-					String yes = (String) ee.eval(new FileReader("/home/johnathan/chatbot.js"));
-					System.out.println(yes+"yes");
-					return yes;
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ScriptException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}  
+				ProcessBuilder b = new ProcessBuilder("node", "/home/johnathan/Documents/telegramBot-alpha-ver-/src/main/resources/chatbot.js",message.getText().toString());
+ 		        try {
+ 		        	Process process = b.start();
+ 		        	String output = IOUtils.toString(process.getInputStream(), StandardCharsets.UTF_8); 		           
+						return output;
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				
 			      
 		    
 			   }
 			}
 		}
+	
 	
        return null;
 	}

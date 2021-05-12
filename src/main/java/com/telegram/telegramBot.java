@@ -14,6 +14,7 @@ public class telegramBot extends TelegramLongPollingBot {
 		 if (update.hasMessage() && update.getMessage().hasText()) {
 			 System.out.println(update.getMessage().getText());
 			   String x = todolist.todo(update.getMessage());
+			
 			   System.out.println(x);
 		       message.setChatId(update.getMessage().getChatId().toString());
 			   if(x!=null) {
@@ -32,6 +33,16 @@ public class telegramBot extends TelegramLongPollingBot {
 			    	corona china = new corona();
 			    	china.coronaChecker(update.getMessage());
 			    }
+			   if(update.getMessage().getText().equals("/help")) {
+					String help = "List of commands:"+"\n/todo add (add data)"+ "\n/todo edit (edit data)"+ "\n/todo remove (remove data)"+ "\n/todo listall (list all the saved data)"+ "\nsend a picture and type /whatanime to get anime name from that screenshot"+ "\n/memegenerator (generate template for a random meme)"+"\n/corona INSERT_COUNTRY_NAME example (united-kingdom,united-states,united-arab-emirates)"+"\n/imlonely to talk with Annie"+"\n/todo quit (quit session based command i.e add,edit,remove,imlonely)";
+					message.setText(help);
+                    try {
+						execute(message);
+					} catch (TelegramApiException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}						
+				}
 			   if(update.getMessage().getText().equals("/memegenerator")) {
 				   System.out.println("memetialized");
 				   anime meme = new anime();
@@ -73,16 +84,22 @@ public class telegramBot extends TelegramLongPollingBot {
 		    }
 	
 
+	private void execute(String help) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	@Override
 	public String getBotUsername() {
 		// TODO Auto-generated method stub
-		return "jinxto_bot";
+		return "";
 	}
 
 	@Override
 	public String getBotToken() {
 		// TODO Auto-generated method stub
-		return "1798704202:AAGVgDnvvC_h1QYpCpSN9HhAlhIWtt9YSss";
+		return "";
 	}
 
 
