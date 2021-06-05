@@ -296,7 +296,7 @@ public toDoList() {
 		 if(state.get(k).getCategory().equals("edit") && state.get(k).getChatId().equals(chatId)) {
 			 System.out.println(state.get(k).getChatId()+state.get(k).getCategory());
 			 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-				try {m
+				try {
 					format.parse(temp);
 					
 					try {
@@ -471,5 +471,5 @@ public toDoList() {
 	}
 	return null;
 	}
-
 }
+
