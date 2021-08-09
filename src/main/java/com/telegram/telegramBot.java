@@ -33,7 +33,7 @@ public class telegramBot extends TelegramLongPollingBot {
 			    	corona china = new corona();
 			    	china.coronaChecker(update.getMessage());
 			    }
-			   if(update.getMessage().getText().equals("/help")) {
+			   if(update.getMessage().getText().equals("/help") || update.getMessage().getText().equals("/start")) {
 					String help = "List of commands:"+"\n/todo add (add data)"+ "\n/todo edit (edit data)"+ "\n/todo remove (remove data)"+ "\n/todo listall (list all the saved data)"+ "\nsend a picture and type /whatanime to get anime name from that screenshot"+ "\n/memegenerator (generate template for a random meme)"+"\n/corona INSERT_COUNTRY_NAME example (united-kingdom,united-states,united-arab-emirates)"+"\n/imlonely to talk with Annie"+"\n/todo quit (quit session based command i.e add,edit,remove,imlonely)";
 					message.setText(help);
                     try {
