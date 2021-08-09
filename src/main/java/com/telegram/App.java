@@ -15,6 +15,7 @@ public class App  {
         timeComparing compare = new timeComparing();
         try {
             while (true) {
+            	compare.data = null;
                 compare.addData();
                 compare.compare();                
                 Thread.sleep(30* 1000);

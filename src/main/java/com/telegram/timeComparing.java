@@ -3,6 +3,7 @@ package com.telegram;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -25,6 +26,7 @@ public class timeComparing extends telegramBot {
     }public void compare() {
     	if(data.length>=1) {
     	    SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    	    format.setTimeZone(TimeZone.getTimeZone("GMT+8"));
     		for(int i=0; i<data.length/3; i++) {
     			Date datenow = new Date();
     			String date2 = " "+format.format(datenow);

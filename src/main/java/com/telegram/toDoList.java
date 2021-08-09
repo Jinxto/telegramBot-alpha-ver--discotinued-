@@ -427,7 +427,7 @@ public toDoList() {
 	if(message.hasText()) {
 		for(int k = 0; k<state.size();k++) {
 			if(state.get(k).getCategory().equals("deeplearning")&& state.get(k).getChatId().equals(chatId)) {
-				ProcessBuilder b = new ProcessBuilder("node", "/home/johnathan/Documents/telegramBot-alpha-ver-/src/main/resources/chatbot.js",message.getText().toString());
+				ProcessBuilder b = new ProcessBuilder("node", "chatbot.js",message.getText().toString());
  		        try {
  		        	Process process = b.start();
  		        	String output = IOUtils.toString(process.getInputStream(), StandardCharsets.UTF_8); 		           
